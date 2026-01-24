@@ -7,9 +7,18 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- MathJax for LaTeX rendering -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- KaTeX for LaTeX rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '\\[', right: '\\]', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false}
+            ]
+        });"></script>
 
     <style>
         body {
@@ -361,14 +370,16 @@
                     <button class="slider-btn prev" onclick="this.nextElementSibling.scrollBy({left: -300, behavior: 'smooth'})">&#10094;</button>
                     <div class="video-slider">
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_subject1_dance1_v1_part5_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v6_part2_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_subject1_dance1_v1_part8_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v3_part5_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v4_part10_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_run1_subject2_v1_part2_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v5_part2_cropped.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_fight1_subject2_v1_part1_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_subject1_dance1_v1_part8_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_jumps1_subject1_v1_part2_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v3_part5_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_run1_subject2_v1_part2_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v4_part10_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v5_part2_cropped.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_walk1_subject1_v2_part2_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v6_part2_cropped.mp4" type="video/mp4"></video>
+
                     </div>
                     <button class="slider-btn next" onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
                 </div>
