@@ -51,12 +51,14 @@
         .authors {
             font-size: 1.1rem;
             margin-bottom: 20px;
+            line-height: 1.8;
         }
 
         .authors a {
             color: #1a73e8;
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 3px;
+            white-space: nowrap;
         }
 
         .affiliations {
@@ -121,7 +123,7 @@
         .figure-box {
             background: #eee;
             width: 100%;
-            height: 350px;
+            /* height: 350px; */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -139,9 +141,9 @@
 
         .video-grid video {
             width: 100%;
-            height: 350px;
+            /* height: 350px; */
             border-radius: 8px;
-            background-color: #FFE4C4;
+            /* background-color: #FFE4C4; */
         }
 
         /* Results Slider Styles */
@@ -175,11 +177,16 @@
             width: calc(33.33% - 10px);
             /* height: 200px; */
             border-radius: 8px;
-            background-color: #FFE4C4;
+            /* background-color: #FFE4C4; */
         }
 
         .video-slider.no-bg video {
             background-color: transparent;
+        }
+
+        .video-slider.crop-height video {
+            height: 200px;
+            object-fit: cover;
         }
 
         .slider-btn {
@@ -368,7 +375,7 @@
             <div class="results-row">
                 <div class="slider-wrapper">
                     <button class="slider-btn prev" onclick="this.nextElementSibling.scrollBy({left: -300, behavior: 'smooth'})">&#10094;</button>
-                    <div class="video-slider">
+                    <div class="video-slider crop-height">
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_subject1_dance1_v1_part5_cropped.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_fight1_subject2_v1_part1_cropped.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_subject1_dance1_v1_part8_cropped.mp4" type="video/mp4"></video>
