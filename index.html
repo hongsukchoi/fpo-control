@@ -153,13 +153,13 @@
 
         .slider-wrapper {
             position: relative;
-            display: flex;
-            align-items: center;
-            padding: 0 40px;
+            width: 100%;
+            overflow: visible;
         }
 
         .video-slider {
             display: flex;
+            width: 100%;
             overflow-x: auto;
             scroll-behavior: smooth;
             gap: 15px;
@@ -185,8 +185,16 @@
         }
 
         .video-slider.crop-height video {
-            height: 200px;
+            height: 300px;
             object-fit: cover;
+        }
+
+        .video-slider.crop-top video {
+            flex: 0 0 calc(25% - 12px);
+            width: calc(25% - 12px);
+            height: 150px;
+            object-fit: cover;
+            object-position: bottom;
         }
 
         .slider-btn {
@@ -212,8 +220,8 @@
             background: rgba(32, 33, 36, 1);
         }
 
-        .slider-btn.prev { left: 0; }
-        .slider-btn.next { right: 0; }
+        .slider-btn.prev { left: 10px; }
+        .slider-btn.next { right: 10px; }
 
         .row-caption {
             text-align: center;
@@ -278,6 +286,10 @@
             .video-slider video {
                 flex: 0 0 calc(50% - 7.5px);
             }
+            .video-slider.crop-top video {
+                flex: 0 0 calc(33.33% - 10px);
+                width: calc(33.33% - 10px);
+            }
         }
 
         @media (max-width: 600px) {
@@ -287,7 +299,10 @@
             .video-slider video {
                 flex: 0 0 100%;
             }
-            .slider-wrapper { padding: 0; }
+            .video-slider.crop-top video {
+                flex: 0 0 calc(50% - 1.5px);
+                width: calc(50% - 1.5px);
+            }
             .slider-btn { display: none; }
         }
     </style>
@@ -353,22 +368,7 @@
                     </div>
                     <button class="slider-btn next" onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
                 </div>
-                <div class="slider-wrapper">
-                    <button class="slider-btn prev" onclick="this.nextElementSibling.scrollBy({left: -300, behavior: 'smooth'})">&#10094;</button>
-                    <div class="video-slider no-bg">
-                        <video autoplay muted loop playsinline><source src="asset/t1_locomotion/t1_part1.mov" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_locomotion/t1_part2.mov" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_locomotion/t1_part3.mov" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_locomotion/t1_part4.mov" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_locomotion/t1_part5.mov" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_locomotion/t1_part6.mov" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_locomotion/t1_part7.mov" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_locomotion/t1_part8.mov" type="video/mp4"></video>
-
-                    </div>
-                    <button class="slider-btn next" onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
-                </div>
-                <div class="row-caption">Locomotion</div>
+                <div class="row-caption">IsaacLab Locomotion</div>
             </div>
 
             <!-- Motion Tracking Row -->
@@ -380,17 +380,30 @@
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_fight1_subject2_v1_part1_cropped.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_subject1_dance1_v1_part8_cropped.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_jumps1_subject1_v1_part2_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v3_part5_cropped.mp4" type="video/mp4"></video>
+                        <!-- <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v3_part5_cropped.mp4" type="video/mp4"></video> -->
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_run1_subject2_v1_part2_cropped.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v4_part10_cropped.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v5_part2_cropped.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_walk1_subject1_v2_part2_cropped.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v6_part2_cropped.mp4" type="video/mp4"></video>
-
                     </div>
                     <button class="slider-btn next" onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
                 </div>
-                <div class="row-caption">Motion Tracking</div>
+
+                <div class="slider-wrapper">
+                    <button class="slider-btn prev" onclick="this.nextElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10094;</button>
+                    <div class="video-slider crop-top">
+                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part1_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part5_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part6_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part4_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part2_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part3_cropped.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part7_cropped.mp4" type="video/mp4"></video>
+                    </div>
+                    <button class="slider-btn next" onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
+                </div>
+                <div class="row-caption">Sim-to-Real Motion Tracking & Locomotion</div>
             </div>
 
             <!-- Manipulation Finetuning Row -->
