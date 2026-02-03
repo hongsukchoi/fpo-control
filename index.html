@@ -71,10 +71,10 @@
       }
 
       .authors {
+        opacity: 0.7;
         font-weight: 300;
         font-size: 1rem;
         margin-bottom: 20px;
-        line-height: 1.8;
         display: flex;
         flex-wrap: wrap;
         text-align: center;
@@ -449,6 +449,30 @@
       <header>
         <h1>Flow Policy Gradients for Robot&nbsp;Control</h1>
 
+        <div class="links">
+          <a href="https://arxiv.org/abs/2602.02481">
+            <button>
+              <i class="ti ti-article"></i>
+              arXiv
+            </button>
+          </a>
+          <a
+            href="https://github.com/amazon-far/fpo-control"
+            data-tooltip="Repository will be public by February 9th."
+          >
+            <button disabled>
+              <i class="ti ti-brand-github"></i>
+              Code
+            </button>
+          </a>
+        </div>
+
+        <p class="tldr" style="max-width: 600px">
+          <strong>TLDR;</strong> a simple recipe for online RL with flow
+          policies, validated on robot locomotion, humanoid motion tracking, and
+          manipulation
+        </p>
+
         <div class="authors">
           <div>
             <a href="https://brentyi.github.io/">Brent Yi</a><sup>1,2*</sup>
@@ -500,39 +524,14 @@
           <div><sup>3</sup>Stanford</div>
           <div><sup>4</sup>HKU</div>
           <div><sup>5</sup>CMU</div>
-        </div>
-        <div class="affiliations"><div>*Equal Contribution</div></div>
-
-        <div class="links">
-          <a href="https://arxiv.org/abs/2602.02481">
-            <button>
-              <i class="ti ti-article"></i>
-              arXiv
-            </button>
-          </a>
-          <a
-            href="https://github.com/amazon-far/fpo-control"
-            data-tooltip="Repository will be public by February 9th."
-          >
-            <button disabled>
-              <i class="ti ti-brand-github"></i>
-              Code
-            </button>
-          </a>
+          <div>*Equal Contribution</div>
         </div>
 
-        <p class="tldr" style="max-width: 600px">
-          <strong>TLDR;</strong> a simple recipe for online RL with flow
-          policies, validated on robot locomotion, humanoid motion tracking, and
-          manipulation
-          <!-- TL;DR: We propose FPO++, the first online RL method for flow-based policies to achieve from-scratch learning in locomotion and motion tracking — including sim-to-real transfer — as well as successful manipulation fine-tuning with a unified objective. -->
-        </p>
-
-        <img
-          src="asset/20260130_teaser.png"
-          alt="FPO++ Teaser"
-          class="hero-img"
-        />
+        <!-- <img -->
+        <!--   src="asset/20260130_teaser.png" -->
+        <!--   alt="FPO++ Teaser" -->
+        <!--   class="hero-img" -->
+        <!-- /> -->
       </header>
 
       <section id="results">
