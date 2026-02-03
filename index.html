@@ -189,6 +189,17 @@
             object-fit: cover;
         }
 
+        .video-slider.crop-center video {
+            height: 150px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .video-slider.four-col video {
+            flex: 0 0 calc(25% - 12px);
+            width: calc(25% - 12px);
+        }
+
         .video-slider.crop-top video {
             flex: 0 0 calc(25% - 12px);
             width: calc(25% - 12px);
@@ -290,6 +301,10 @@
                 flex: 0 0 calc(33.33% - 10px);
                 width: calc(33.33% - 10px);
             }
+            .video-slider.four-col video {
+                flex: 0 0 calc(33.33% - 10px);
+                width: calc(33.33% - 10px);
+            }
         }
 
         @media (max-width: 600px) {
@@ -303,6 +318,10 @@
                 flex: 0 0 calc(50% - 1.5px);
                 width: calc(50% - 1.5px);
             }
+            .video-slider.four-col video {
+                flex: 0 0 calc(50% - 7.5px);
+                width: calc(50% - 7.5px);
+            }
             .slider-btn { display: none; }
         }
     </style>
@@ -312,6 +331,9 @@
     <div class="container">
         <header>
             <h1>Flow Policy Gradients for Robot Control</h1>
+
+            <img src="asset/20260130_teaser.png" alt="FPO++ Teaser" class="hero-img">
+
             <div class="authors">
                 <a href="#">Brent Yi</a><sup>1,2*</sup>,
                 <a href="#">Hongsuk Choi</a><sup>1,2*</sup>,
@@ -337,10 +359,6 @@
             </div>
         </header>
 
-
-
-        <img src="asset/teaser_draft.png" alt="FPO++ Teaser" class="hero-img">
-
         <section id="abstract">
             <h2>Abstract</h2>
             <p>
@@ -359,12 +377,19 @@
             <div class="results-row">
                 <div class="slider-wrapper">
                     <button class="slider-btn prev" onclick="this.nextElementSibling.scrollBy({left: -300, behavior: 'smooth'})">&#10094;</button>
-                    <div class="video-slider">
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/forward1_fpo.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/left1_fpo.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/forward2.5_fpo.mp4" type="video/mp4"></video>
+                    <div class="video-slider crop-center">
                         <video autoplay muted loop playsinline><source src="asset/viser_locomotion/turn1_fpo.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/go2_backward.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/g1_forward.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/h1_forward4.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/forward2.5_fpo.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/left1_fpo.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/viser_locomotion/forward0.25_fpo.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/forward1_fpo.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/go2_turn.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/go2_forward.mp4" type="video/mp4"></video>
+                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/go2_sidewalk.mp4" type="video/mp4"></video>
+
                     </div>
                     <button class="slider-btn next" onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
                 </div>
@@ -403,14 +428,14 @@
                     </div>
                     <button class="slider-btn next" onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
                 </div>
-                <div class="row-caption">Sim-to-Real Motion Tracking & Locomotion</div>
+                <div class="row-caption">Sim-to-Real<br>Motion Tracking & Locomotion</div>
             </div>
 
             <!-- Manipulation Finetuning Row -->
             <div class="results-row">
                 <div class="slider-wrapper">
                     <button class="slider-btn prev" onclick="this.nextElementSibling.scrollBy({left: -300, behavior: 'smooth'})">&#10094;</button>
-                    <div class="video-slider">
+                    <div class="video-slider four-col">
                         <video autoplay muted loop playsinline><source src="asset/manipulation/traylift.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/manipulation/boxcleanup.mp4" type="video/mp4"></video>
                         <video autoplay muted loop playsinline><source src="asset/manipulation/square.mp4" type="video/mp4"></video>
