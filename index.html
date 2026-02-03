@@ -1,633 +1,1013 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project Title: Your Research Paper Name</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- KaTeX for LaTeX rendering -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-        onload="renderMathInElement(document.body, {
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+      onload="renderMathInElement(document.body, {
             delimiters: [
                 {left: '$$', right: '$$', display: true},
                 {left: '\\[', right: '\\]', display: true},
                 {left: '$', right: '$', display: false},
                 {left: '\\(', right: '\\)', display: false}
             ]
-        });"></script>
+        });"
+    ></script>
 
     <style>
-        body {
-            font-family: 'Google Sans', sans-serif;
-            line-height: 1.6;
-            color: #3c4043;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-        }
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.5;
+        color: #3c4043;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+      }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
 
-        /* Header Section */
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+      /* Header Section */
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            color: #202124;
-            user-select: none;
-            cursor: default;
-        }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: #202124;
+      }
 
-        .authors {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
+      .authors {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        line-height: 1.8;
+      }
 
-        .authors a {
-            color: #1a73e8;
-            text-decoration: none;
-            margin: 0 3px;
-            white-space: nowrap;
-        }
+      .authors {
+        font-weight: 300;
+        font-size: 1rem;
+        margin-bottom: 20px;
+        line-height: 1.8;
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        text-wrap: nowrap;
+        justify-content: center;
+        gap: 0.2em 0.875em;
+        margin: 0 auto;
+      }
 
-        .affiliations {
-            font-style: italic;
-            font-size: 0.9rem;
-            color: #5f6368;
-        }
+      sup {
+        font-size: 0.6em;
+      }
 
-        .author-box {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin-top: 20px;
-            user-select: none;
-            cursor: default;
-        }
+      a:link,
+      a:visited {
+        color: #1a73e8;
+        text-decoration: none;
+      }
 
-        .author-box .authors {
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-        }
+      a:hover {
+        opacity: 0.8;
+      }
 
-        .author-box .authors a {
-            color: #5f6368;
-            text-decoration: none;
-        }
+      .authors a {
+        margin: 0 3px;
+        white-space: nowrap;
+      }
 
-        .author-box .authors a:hover {
-            color: #1a73e8;
-            text-decoration: underline;
-        }
+      .affiliations {
+        gap: 0.2em 0.875em;
+        display: flex;
+        text-align: center;
+        text-wrap: nowrap;
+        justify-content: center;
+        font-style: italic;
+        font-size: 0.9rem;
+        opacity: 0.5;
+        margin-top: 0.5em;
+      }
 
-        .author-box .affiliations {
-            font-size: 0.85rem;
-            margin-bottom: 0;
-        }
+      .tldr {
+        font-size: 1.1rem;
+        color: #5f6368;
+        max-width: 800px;
+        margin: 15px auto 25px;
+      }
 
-        .tldr {
-            font-size: 1.1rem;
-            color: #5f6368;
-            max-width: 800px;
-            margin: 15px auto 25px;
-        }
+      /* Button Links (Paper, Code, etc.) */
+      .links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin: 20px 0;
+      }
 
-        /* Button Links (Paper, Code, etc.) */
-        .links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 30px 0;
-        }
+      .btn {
+        background-color: #3c4043;
+        padding: 8px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 300;
+        transition: background 0.3s;
+      }
+      a.btn:link,
+      a.btn:visited {
+        color: #fff;
+      }
 
-        .btn {
-            background-color: #3c4043;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
+      .btn:hover {
+        background-color: #202124;
+      }
 
-        .btn:hover {
-            background-color: #202124;
-        }
+      /* Content Sections */
+      section {
+        margin-bottom: 60px;
+      }
 
-        /* Content Sections */
-        section {
-            margin-bottom: 60px;
-        }
+      h2 {
+        border-bottom: 1px solid #e8eaed;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
 
-        h2 {
-            border-bottom: 1px solid #e8eaed;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
+      .hero-img {
+        width: 100%;
+        /* border-radius: 8px; */
+        /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+        margin-bottom: 30px;
+      }
 
-        .hero-img {
-            width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
+      /* Citation Block */
+      pre {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 0.9rem;
+        border: 1px solid #dadce0;
+      }
 
-        /* Citation Block */
-        pre {
-            background-color: #f8f9fa;
-            padding: 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
-            border: 1px solid #dadce0;
-        }
+      /* Placeholder for Figures */
+      .figure-box {
+        background: #eee;
+        width: 100%;
+        /* height: 350px; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        margin: 20px 0;
+        color: #888;
+      }
 
-        /* Placeholder for Figures */
-        .figure-box {
-            background: #eee;
-            width: 100%;
-            /* height: 350px; */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            margin: 20px 0;
-            color: #888;
-        }
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin: 20px 0;
+      }
 
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin: 20px 0;
-        }
+      .video-grid video {
+        width: 100%;
+        /* height: 350px; */
+        border-radius: 8px;
+        /* background-color: #FFE4C4; */
+      }
 
-        .video-grid video {
-            width: 100%;
-            /* height: 350px; */
-            border-radius: 8px;
-            /* background-color: #FFE4C4; */
-        }
+      /* Results Slider Styles */
+      .results-row {
+        margin-bottom: 50px;
+      }
 
-        /* Results Slider Styles */
-        .results-row {
-            margin-bottom: 50px;
-        }
+      .slider-wrapper {
+        position: relative;
+        width: 100%;
+        overflow: visible;
+      }
 
-        .slider-wrapper {
-            position: relative;
-            width: 100%;
-            overflow: visible;
-        }
+      .video-slider {
+        display: flex;
+        width: 100%;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        gap: 15px;
+        padding: 10px 0;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
 
-        .video-slider {
-            display: flex;
-            width: 100%;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            gap: 15px;
-            padding: 10px 0;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
+      .video-slider::-webkit-scrollbar {
+        display: none;
+      }
 
-        .video-slider::-webkit-scrollbar {
-            display: none;
-        }
+      .video-slider video {
+        flex: 0 0 calc(33.33% - 10px);
+        width: calc(33.33% - 10px);
+        /* height: 200px; */
+        border-radius: 8px;
+        /* background-color: #FFE4C4; */
+      }
 
+      .video-slider.no-bg video {
+        background-color: transparent;
+      }
+
+      .video-slider.crop-height video {
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .video-slider.crop-center video {
+        height: 150px;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .video-slider.four-col video {
+        flex: 0 0 calc(25% - 12px);
+        width: calc(25% - 12px);
+      }
+
+      .video-slider.crop-top video {
+        flex: 0 0 calc(25% - 12px);
+        width: calc(25% - 12px);
+        height: 150px;
+        object-fit: cover;
+        object-position: bottom;
+      }
+
+      .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(60, 64, 67, 0.8);
+        color: white;
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        transition: background 0.3s;
+      }
+
+      .slider-btn:hover {
+        background: rgba(32, 33, 36, 1);
+      }
+
+      .slider-btn.prev {
+        left: 10px;
+      }
+      .slider-btn.next {
+        right: 10px;
+      }
+
+      .row-caption {
+        text-align: center;
+        margin-top: 15px;
+        font-weight: 500;
+        color: #3c4043;
+        font-size: 1.2rem;
+      }
+      .row-subcaption {
+        text-align: center;
+        font-weight: 400;
+        color: #aaa;
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      /* Algorithm Section Styles */
+      .algorithm-box {
+        background: #f8f9fa;
+        border: 1px solid #dadce0;
+        border-radius: 8px;
+        padding: 25px;
+        margin: 25px 0;
+      }
+
+      .algorithm-box h4 {
+        margin-top: 0;
+        color: #202124;
+        border-bottom: 1px solid #dadce0;
+        padding-bottom: 10px;
+      }
+
+      .equation-box {
+        background: #fff;
+        border: 1px solid #e8eaed;
+        border-radius: 6px;
+        padding: 15px 20px;
+        margin: 15px 0;
+        overflow-x: auto;
+      }
+
+      .component-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .component-list li {
+        padding: 10px 0;
+        border-bottom: 1px solid #e8eaed;
+      }
+
+      .component-list li:last-child {
+        border-bottom: none;
+      }
+
+      .component-list strong {
+        color: #1a73e8;
+      }
+
+      .highlight-box {
+        background: linear-gradient(135deg, #e8f0fe 0%, #f8f9fa 100%);
+        border-left: 4px solid #1a73e8;
+        padding: 15px 20px;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+      }
+
+      @media (max-width: 900px) {
         .video-slider video {
-            flex: 0 0 calc(33.33% - 10px);
-            width: calc(33.33% - 10px);
-            /* height: 200px; */
-            border-radius: 8px;
-            /* background-color: #FFE4C4; */
+          flex: 0 0 calc(50% - 7.5px);
         }
-
-        .video-slider.no-bg video {
-            background-color: transparent;
-        }
-
-        .video-slider.crop-height video {
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .video-slider.crop-center video {
-            height: 150px;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        .video-slider.four-col video {
-            flex: 0 0 calc(25% - 12px);
-            width: calc(25% - 12px);
-        }
-
         .video-slider.crop-top video {
-            flex: 0 0 calc(25% - 12px);
-            width: calc(25% - 12px);
-            height: 150px;
-            object-fit: cover;
-            object-position: bottom;
+          flex: 0 0 calc(33.33% - 10px);
+          width: calc(33.33% - 10px);
         }
+        .video-slider.four-col video {
+          flex: 0 0 calc(33.33% - 10px);
+          width: calc(33.33% - 10px);
+        }
+      }
 
+      @media (max-width: 600px) {
+        h1 {
+          font-size: 1.8rem;
+        }
+        .links {
+          flex-direction: column;
+          align-items: center;
+        }
+        .video-grid {
+          grid-template-columns: 1fr;
+        }
+        .video-slider video {
+          flex: 0 0 100%;
+        }
+        .video-slider.crop-top video {
+          flex: 0 0 calc(50% - 1.5px);
+          width: calc(50% - 1.5px);
+        }
+        .video-slider.four-col video {
+          flex: 0 0 calc(50% - 7.5px);
+          width: calc(50% - 7.5px);
+        }
         .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(60, 64, 67, 0.8);
-            color: white;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: background 0.3s;
+          display: none;
         }
-
-        .slider-btn:hover {
-            background: rgba(32, 33, 36, 1);
-        }
-
-        .slider-btn.prev { left: 10px; }
-        .slider-btn.next { right: 10px; }
-
-        .row-caption {
-            text-align: center;
-            margin-top: 15px;
-            font-weight: 500;
-            color: #3c4043;
-            font-size: 1.1rem;
-        }
-
-        /* Algorithm Section Styles */
-        .algorithm-box {
-            background: #f8f9fa;
-            border: 1px solid #dadce0;
-            border-radius: 8px;
-            padding: 25px;
-            margin: 25px 0;
-        }
-
-        .algorithm-box h4 {
-            margin-top: 0;
-            color: #202124;
-            border-bottom: 1px solid #dadce0;
-            padding-bottom: 10px;
-        }
-
-        .equation-box {
-            background: #fff;
-            border: 1px solid #e8eaed;
-            border-radius: 6px;
-            padding: 15px 20px;
-            margin: 15px 0;
-            overflow-x: auto;
-        }
-
-        .component-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .component-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid #e8eaed;
-        }
-
-        .component-list li:last-child {
-            border-bottom: none;
-        }
-
-        .component-list strong {
-            color: #1a73e8;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, #e8f0fe 0%, #f8f9fa 100%);
-            border-left: 4px solid #1a73e8;
-            padding: 15px 20px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        @media (max-width: 900px) {
-            .video-slider video {
-                flex: 0 0 calc(50% - 7.5px);
-            }
-            .video-slider.crop-top video {
-                flex: 0 0 calc(33.33% - 10px);
-                width: calc(33.33% - 10px);
-            }
-            .video-slider.four-col video {
-                flex: 0 0 calc(33.33% - 10px);
-                width: calc(33.33% - 10px);
-            }
-        }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .links { flex-direction: column; align-items: center; }
-            .video-grid { grid-template-columns: 1fr; }
-            .video-slider video {
-                flex: 0 0 100%;
-            }
-            .video-slider.crop-top video {
-                flex: 0 0 calc(50% - 1.5px);
-                width: calc(50% - 1.5px);
-            }
-            .video-slider.four-col video {
-                flex: 0 0 calc(50% - 7.5px);
-                width: calc(50% - 7.5px);
-            }
-            .slider-btn { display: none; }
-        }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>Flow Policy Gradients<br>for Robot Control</h1>
+      <header>
+        <h1>Flow Policy Gradients for Robot&nbsp;Control</h1>
 
-            <div class="links">
-                <a href="#" class="btn">Paper</a>
-                <a href="https://github.com/amazon-far/fpo-control" class="btn">Code</a>
+        <div class="links">
+          <a href="#" class="btn">Paper</a>
+          <a href="https://github.com/amazon-far/fpo-control" class="btn"
+            >Code</a
+          >
+        </div>
+
+        <p class="tldr" style="max-width: 600px">
+          <strong>TLDR;</strong> a simple recipe for online RL with flow
+          policies, which we validate on robot locomotion, humanoid motion
+          tracking, and manipulation
+          <!-- TL;DR: We propose FPO++, the first online RL method for flow-based policies to achieve from-scratch learning in locomotion and motion tracking — including sim-to-real transfer — as well as successful manipulation fine-tuning with a unified objective. -->
+        </p>
+
+        <img
+          src="asset/20260130_teaser.png"
+          alt="FPO++ Teaser"
+          class="hero-img"
+        />
+
+        <div class="authors">
+          <div>
+            <a href="https://brentyi.github.io/">Brent Yi</a><sup>1,2*</sup>
+          </div>
+          <div>
+            <a href="https://hongsukchoi.github.io/">Hongsuk Choi</a
+            ><sup>1,2*</sup>
+          </div>
+          <div>
+            <a href="https://hgaurav2k.github.io/">Himanshu Gaurav Singh</a
+            ><sup>1,2</sup>
+          </div>
+          <div>
+            <a href="https://x.com/x_h_ucb">Xiaoyu Huang</a><sup>1,2</sup>
+          </div>
+          <div>
+            <a href="https://www.takaratruong.com/">Takara E. Truong</a
+            ><sup>1,3</sup>
+          </div>
+          <div>
+            <a href="https://sferrazza.cc/">Carmelo Sferrazza</a><sup>1</sup>
+          </div>
+          <div>
+            <a href="https://people.eecs.berkeley.edu/~yima/">Yi Ma</a
+            ><sup>2,4</sup>
+          </div>
+          <div><a href="http://rockyduan.com/">Yan Duan</a><sup>1</sup></div>
+          <div>
+            <a href="https://people.eecs.berkeley.edu/~pabbeel/"
+              >Pieter Abbeel</a
+            ><sup>1,2</sup>
+          </div>
+          <div><a href="https://www.gshi.me/">Guanya Shi</a><sup>1,5</sup></div>
+          <div>
+            <a href="https://profiles.stanford.edu/c-karen-liu">Karen Liu</a
+            ><sup>1,3</sup>
+          </div>
+          <div>
+            <a href="https://people.eecs.berkeley.edu/~kanazawa/"
+              >Angjoo Kanazawa</a
+            ><sup>1,2</sup>
+          </div>
+        </div>
+        <div class="affiliations">
+          <div><sup>1</sup>Amazon FAR</div>
+          <div><sup>2</sup>UC Berkeley</div>
+          <div><sup>3</sup>Stanford</div>
+          <div><sup>4</sup>HKU</div>
+          <div><sup>5</sup>CMU</div>
+        </div>
+        <div class="affiliations"><div>*Equal Contribution</div></div>
+      </header>
+
+      <section id="results">
+        <!-- Locomotion Row -->
+        <div class="results-row">
+          <div class="row-caption">Legged Locomotion</div>
+          <div class="row-subcaption">IsaacLab Environments</div>
+          <div class="slider-wrapper">
+            <button
+              class="slider-btn prev"
+              onclick="this.nextElementSibling.scrollBy({left: -300, behavior: 'smooth'})"
+            >
+              &#10094;
+            </button>
+            <div class="video-slider crop-center">
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/viser_locomotion/turn1_fpo.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/viser_locomotion/go2_backward.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/viser_locomotion/g1_forward.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/viser_locomotion/h1_forward4.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/viser_locomotion/forward2.5_fpo.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/viser_locomotion/left1_fpo.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/viser_locomotion/forward0.25_fpo.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/viser_locomotion/forward1_fpo.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/viser_locomotion/go2_turn.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/viser_locomotion/go2_forward.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/viser_locomotion/go2_sidewalk.mp4"
+                  type="video/mp4"
+                />
+              </video>
             </div>
+            <button
+              class="slider-btn next"
+              onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})"
+            >
+              &#10095;
+            </button>
+          </div>
+        </div>
 
-            <p class="tldr">
-                TL;DR: We propose FPO++, the first online RL method for flow-based policies to achieve from-scratch learning in locomotion and motion tracking — including sim-to-real transfer — as well as successful manipulation fine-tuning with a unified objective.
-            </p>
-
-            <img src="asset/20260130_teaser.png" alt="FPO++ Teaser" class="hero-img">
-
-            <div class="author-box">
-                <div class="authors">
-                    <a href="https://brentyi.github.io/" target="_blank">Brent Yi</a><sup>1,2*</sup>,
-                    <a href="https://hongsukchoi.github.io/" target="_blank">Hongsuk Choi</a><sup>1,2*</sup>,
-                    <a href="https://hgaurav2k.github.io/" target="_blank">Himanshu Gaurav Singh</a><sup>1,2</sup>,
-                    <a href="https://scholar.google.com/citations?user=G-x_szsAAAAJ" target="_blank">Xiaoyu Huang</a><sup>1,2</sup>,
-                    <a href="https://www.takaratruong.com/" target="_blank">Takara E. Truong</a><sup>1,3</sup>,
-                    <a href="https://sferrazza.cc/" target="_blank">Carmelo Sferrazza</a><sup>1</sup>,
-                    <a href="https://people.eecs.berkeley.edu/~yima/" target="_blank">Yi Ma</a><sup>2,4</sup>,
-                    <a href="http://rockyduan.com/" target="_blank">Rocky Duan</a><sup>1</sup>,
-                    <a href="https://people.eecs.berkeley.edu/~pabbeel/" target="_blank">Pieter Abbeel</a><sup>1,2</sup>,
-                    <a href="https://www.gshi.me/" target="_blank">Guanya Shi</a><sup>1,5</sup>,
-                    <a href="https://profiles.stanford.edu/c-karen-liu" target="_blank">Karen Liu</a><sup>1,3</sup>,
-                    <a href="https://people.eecs.berkeley.edu/~kanazawa/" target="_blank">Angjoo Kanazawa</a><sup>1,2</sup>
-                </div>
-                <div class="affiliations">
-                    <sup>1</sup>Amazon FAR, <sup>2</sup>UC Berkeley, <sup>3</sup>Stanford, <sup>4</sup>HKU, <sup>5</sup>CMU<br>
-                    <span style="font-size: 0.9em;">*Equal Contribution</span>
-                </div>
+        <!-- Motion Tracking Row -->
+        <div class="results-row">
+          <div class="row-caption">Sim-to-Real</div>
+          <div class="row-subcaption">Motion Tracking & Locomotion</div>
+          <div class="slider-wrapper">
+            <button
+              class="slider-btn prev"
+              onclick="this.nextElementSibling.scrollBy({left: -300, behavior: 'smooth'})"
+            >
+              &#10094;
+            </button>
+            <div class="video-slider crop-height">
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/motion_tracking/website_subject1_dance1_v1_part5_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/motion_tracking/website_fight1_subject2_v1_part1_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/motion_tracking/website_subject1_dance1_v1_part8_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/motion_tracking/website_jumps1_subject1_v1_part2_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <!-- <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v3_part5_cropped.mp4" type="video/mp4"></video> -->
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/motion_tracking/website_run1_subject2_v1_part2_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/motion_tracking/website_dance1_subject2_v4_part10_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/motion_tracking/website_dance1_subject2_v5_part2_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/motion_tracking/website_walk1_subject1_v2_part2_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/motion_tracking/website_dance1_subject2_v6_part2_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
             </div>
+            <button
+              class="slider-btn next"
+              onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})"
+            >
+              &#10095;
+            </button>
+          </div>
 
-        </header>
-
-        <section id="results">
-            <h2>Results</h2>
-            
-            <!-- Locomotion Row -->
-            <div class="results-row">
-                <div class="slider-wrapper">
-                    <button class="slider-btn prev" onclick="this.nextElementSibling.scrollBy({left: -300, behavior: 'smooth'})">&#10094;</button>
-                    <div class="video-slider crop-center">
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/turn1_fpo.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/go2_backward.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/g1_forward.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/h1_forward4.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/forward2.5_fpo.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/left1_fpo.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/forward0.25_fpo.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/forward1_fpo.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/go2_turn.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/go2_forward.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/viser_locomotion/go2_sidewalk.mp4" type="video/mp4"></video>
-
-                    </div>
-                    <button class="slider-btn next" onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
-                </div>
-                <div class="row-caption">IsaacLab Locomotion</div>
+          <div class="slider-wrapper">
+            <button
+              class="slider-btn prev"
+              onclick="this.nextElementSibling.scrollBy({left: 300, behavior: 'smooth'})"
+            >
+              &#10094;
+            </button>
+            <div class="video-slider crop-top">
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/t1_cropped_videos/t1_part1_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/t1_cropped_videos/t1_part5_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/t1_cropped_videos/t1_part6_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/t1_cropped_videos/t1_part4_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/t1_cropped_videos/t1_part2_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/t1_cropped_videos/t1_part3_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/t1_cropped_videos/t1_part7_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
             </div>
+            <button
+              class="slider-btn next"
+              onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})"
+            >
+              &#10095;
+            </button>
+          </div>
+        </div>
 
-            <!-- Motion Tracking Row -->
-            <div class="results-row">
-                <div class="slider-wrapper">
-                    <button class="slider-btn prev" onclick="this.nextElementSibling.scrollBy({left: -300, behavior: 'smooth'})">&#10094;</button>
-                    <div class="video-slider crop-height">
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_subject1_dance1_v1_part5_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_fight1_subject2_v1_part1_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_subject1_dance1_v1_part8_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_jumps1_subject1_v1_part2_cropped.mp4" type="video/mp4"></video>
-                        <!-- <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v3_part5_cropped.mp4" type="video/mp4"></video> -->
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_run1_subject2_v1_part2_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v4_part10_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v5_part2_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_walk1_subject1_v2_part2_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/motion_tracking/website_dance1_subject2_v6_part2_cropped.mp4" type="video/mp4"></video>
-                    </div>
-                    <button class="slider-btn next" onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
-                </div>
-
-                <div class="slider-wrapper">
-                    <button class="slider-btn prev" onclick="this.nextElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10094;</button>
-                    <div class="video-slider crop-top">
-                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part1_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part5_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part6_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part4_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part2_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part3_cropped.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/t1_cropped_videos/t1_part7_cropped.mp4" type="video/mp4"></video>
-                    </div>
-                    <button class="slider-btn next" onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
-                </div>
-                <div class="row-caption">Sim-to-Real<br>Motion Tracking & Locomotion</div>
+        <!-- Manipulation Finetuning Row -->
+        <div class="results-row">
+          <div class="row-caption">Manipulation Fine-tuning</div>
+          <div class="row-subcaption">Robomimic & DexMimicGen</div>
+          <div class="slider-wrapper">
+            <button
+              class="slider-btn prev"
+              onclick="this.nextElementSibling.scrollBy({left: -300, behavior: 'smooth'})"
+            >
+              &#10094;
+            </button>
+            <div class="video-slider four-col">
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/manipulation/traylift.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/manipulation/boxcleanup.mp4"
+                  type="video/mp4"
+                />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source src="asset/manipulation/square.mp4" type="video/mp4" />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source src="asset/manipulation/can.mp4" type="video/mp4" />
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/manipulation/threading.mp4"
+                  type="video/mp4"
+                />
+              </video>
             </div>
+            <button
+              class="slider-btn next"
+              onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})"
+            >
+              &#10095;
+            </button>
+          </div>
+        </div>
+      </section>
 
-            <!-- Manipulation Finetuning Row -->
-            <div class="results-row">
-                <div class="slider-wrapper">
-                    <button class="slider-btn prev" onclick="this.nextElementSibling.scrollBy({left: -300, behavior: 'smooth'})">&#10094;</button>
-                    <div class="video-slider four-col">
-                        <video autoplay muted loop playsinline><source src="asset/manipulation/traylift.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/manipulation/boxcleanup.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/manipulation/square.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/manipulation/can.mp4" type="video/mp4"></video>
-                        <video autoplay muted loop playsinline><source src="asset/manipulation/threading.mp4" type="video/mp4"></video>
-                    </div>
-                    <button class="slider-btn next" onclick="this.previousElementSibling.scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
-                </div>
-                <div class="row-caption">Manipulation Finetuning</div>
-            </div>
-        </section>
-        
-        <section id="motivation">
-            <h2>Motivation</h2>
+      <section id="motivation">
+        <h2>Motivation</h2>
 
-            <h3>Why Flow Policies for Robot Control?</h3>
-            <p>
-                Likelihood-based policy gradient methods like PPO have enabled impressive robot control results across legged locomotion, humanoid control, and manipulation. However, these methods require differentiable action likelihoods, which constrains policy outputs to <strong>simple distributions</strong> such as diagonal Gaussians. This limitation is problematic for complex robotic tasks that may benefit from more expressive action distributions.
-            </p>
+        <h3>Why Flow Policies for Robot Control?</h3>
+        <p>
+          Likelihood-based policy gradient methods like PPO have enabled
+          impressive robot control results across legged locomotion, humanoid
+          control, and manipulation. However, these methods require
+          differentiable action likelihoods, which constrains policy outputs to
+          <strong>simple distributions</strong> such as diagonal Gaussians. This
+          limitation is problematic for complex robotic tasks that may benefit
+          from more expressive action distributions.
+        </p>
 
-            <p>
-                Flow-based generative models have emerged as the frontier for supervised policy learning in robotics. Policies like Diffusion Policy and <span style="font-family: serif; font-style: italic;">&pi;</span><sub>0</sub> have demonstrated success in learning manipulation from human demonstrations, including at large scale with language conditioning. However, these approaches rely on offline behavior cloning and cannot be improved through online interaction with the environment.
-            </p>
+        <p>
+          Flow-based generative models have emerged as the frontier for
+          supervised policy learning in robotics. Policies like Diffusion Policy
+          and <span style="font-family: serif; font-style: italic">&pi;</span
+          ><sub>0</sub> have demonstrated success in learning manipulation from
+          human demonstrations, including at large scale with language
+          conditioning. However, these approaches rely on offline behavior
+          cloning and cannot be improved through online interaction with the
+          environment.
+        </p>
 
-            <div class="highlight-box">
-                <strong>Key Insight:</strong> Flow policies can express more complex, multi-modal action distributions than Gaussian policies. This enables better exploration during training and the ability to capture coordinated, symmetric behaviors (e.g., alternating gaits in locomotion) that are difficult to represent with independent per-dimension sampling.
-            </div>
+        <div class="highlight-box">
+          <strong>Key Insight:</strong> Flow policies can express more complex,
+          multi-modal action distributions than Gaussian policies. This enables
+          better exploration during training and the ability to capture
+          coordinated, symmetric behaviors (e.g., alternating gaits in
+          locomotion) that are difficult to represent with independent
+          per-dimension sampling.
+        </div>
 
-            <p>
-                Reinforcement learning algorithms that support flow-based representations promise to:
-            </p>
-            <ul class="component-list">
-                <li><strong>Enable more expressive exploration:</strong> Flow policies can model correlations between action dimensions, facilitating discovery of coordinated behaviors</li>
-                <li><strong>Support finetuning of pretrained policies:</strong> Policies pretrained via behavior cloning can be improved through reward-based RL</li>
-                <li><strong>Train policies from scratch:</strong> Learn complex control policies directly from environment rewards without requiring demonstrations</li>
-            </ul>
+        <p>
+          Reinforcement learning algorithms that support flow-based
+          representations promise to:
+        </p>
+        <ul class="component-list">
+          <li>
+            <strong>Enable more expressive exploration:</strong> Flow policies
+            can model correlations between action dimensions, facilitating
+            discovery of coordinated behaviors
+          </li>
+          <li>
+            <strong>Support finetuning of pretrained policies:</strong> Policies
+            pretrained via behavior cloning can be improved through reward-based
+            RL
+          </li>
+          <li>
+            <strong>Train policies from scratch:</strong> Learn complex control
+            policies directly from environment rewards without requiring
+            demonstrations
+          </li>
+        </ul>
 
-            <h3>Limitations of Vanilla FPO</h3>
-            <p>
-                The Flow Policy Optimization (FPO) algorithm was proposed to enable PPO-style training of flow policies by replacing likelihood ratios with a surrogate based on conditional flow matching (CFM) losses. While FPO succeeds on simpler synthetic benchmarks like DeepMind Control Suite, we found it <strong>unstable for challenging real-world robotics tasks</strong>.
-            </p>
+        <h3>Limitations of Vanilla FPO</h3>
+        <p>
+          The Flow Policy Optimization (FPO) algorithm was proposed to enable
+          PPO-style training of flow policies by replacing likelihood ratios
+          with a surrogate based on conditional flow matching (CFM) losses.
+          While FPO succeeds on simpler synthetic benchmarks like DeepMind
+          Control Suite, we found it
+          <strong>unstable for challenging real-world robotics tasks</strong>.
+        </p>
 
-            <div class="algorithm-box">
-                <h4>Challenges with Vanilla FPO in Robotics</h4>
-                <ul class="component-list">
-                    <li><strong>High-dimensional action spaces:</strong> Humanoid robots have 19-29+ degrees of freedom, making optimization more challenging</li>
-                    <li><strong>Realistic physical constraints:</strong> Joint position limits, torque limits, and contact dynamics introduce discontinuities and hard constraints</li>
-                    <li><strong>Coarse reward signals:</strong> Robotics rewards are often sparse or shaped differently than game-like benchmarks</li>
-                    <li><strong>Gradient variance:</strong> The per-action ratio formulation in vanilla FPO leads to high gradient variance, causing unstable updates</li>
-                    <li><strong>Entropy collapse:</strong> Without proper regularization, flow policies can prematurely narrow their action distributions, losing the ability to explore and recover from local minima</li>
-                </ul>
-            </div>
+        <div class="algorithm-box">
+          <h4>Challenges with Vanilla FPO in Robotics</h4>
+          <ul class="component-list">
+            <li>
+              <strong>High-dimensional action spaces:</strong> Humanoid robots
+              have 19-29+ degrees of freedom, making optimization more
+              challenging
+            </li>
+            <li>
+              <strong>Realistic physical constraints:</strong> Joint position
+              limits, torque limits, and contact dynamics introduce
+              discontinuities and hard constraints
+            </li>
+            <li>
+              <strong>Coarse reward signals:</strong> Robotics rewards are often
+              sparse or shaped differently than game-like benchmarks
+            </li>
+            <li>
+              <strong>Gradient variance:</strong> The per-action ratio
+              formulation in vanilla FPO leads to high gradient variance,
+              causing unstable updates
+            </li>
+            <li>
+              <strong>Entropy collapse:</strong> Without proper regularization,
+              flow policies can prematurely narrow their action distributions,
+              losing the ability to explore and recover from local minima
+            </li>
+          </ul>
+        </div>
 
-            <p>
-                These issues manifest as training instability: vanilla FPO policies are prone to <strong>catastrophic failures</strong> and <strong>local minima</strong>, even after extensive hyperparameter tuning. FPO++ addresses these challenges through per-sample ratio clipping and an asymmetric trust region that reduces gradient variance while preserving entropy.
-            </p>
-        </section>
+        <p>
+          These issues manifest as training instability: vanilla FPO policies
+          are prone to <strong>catastrophic failures</strong> and
+          <strong>local minima</strong>, even after extensive hyperparameter
+          tuning. FPO++ addresses these challenges through per-sample ratio
+          clipping and an asymmetric trust region that reduces gradient variance
+          while preserving entropy.
+        </p>
+      </section>
 
-        <section id="algorithm">
-            <h2>Algorithm</h2>
+      <section id="algorithm">
+        <h2>Algorithm</h2>
 
-            <p>
-                We introduce <strong>FPO++</strong>, an improved flow policy gradient algorithm that enables stable training of flow-based policies for real-world robotics tasks. FPO++ builds upon the Flow Policy Optimization (FPO) framework, which bypasses intractable likelihood computation by using conditional flow matching (CFM) losses as a surrogate for the PPO likelihood ratio.
-            </p>
+        <p>
+          We introduce <strong>FPO++</strong>, an improved flow policy gradient
+          algorithm that enables stable training of flow-based policies for
+          real-world robotics tasks. FPO++ builds upon the Flow Policy
+          Optimization (FPO) framework, which bypasses intractable likelihood
+          computation by using conditional flow matching (CFM) losses as a
+          surrogate for the PPO likelihood ratio.
+        </p>
 
-            <h3>Background: Flow Matching Policy Gradients</h3>
-            <p>
-                Standard FPO replaces the PPO likelihood ratio \(\rho(\theta)\) with a likelihood-free surrogate based on CFM loss differences:
-            </p>
-            <div class="equation-box">
-                \[
-                \hat{r}_{\text{FPO}}(\theta) = \exp\left(\hat{\mathcal{L}}_{\text{CFM},\theta_{\text{old}}}(a_t; o_t) - \hat{\mathcal{L}}_{\text{CFM},\theta}(a_t; o_t)\right)
-                \]
-            </div>
-            <p>
-                where the CFM loss is estimated by sampling noise \(\epsilon_i \sim \mathcal{N}(0, I)\) and flow timesteps \(\tau_i \in [0, 1]\):
-            </p>
-            <div class="equation-box">
-                \[
-                \hat{\mathcal{L}}_{\text{CFM},\theta}(a_t; o_t) = \frac{1}{N_{\text{mc}}} \sum_{i}^{N_{\text{mc}}} \|\hat{v}_\theta(a_t^{\tau_i}, \tau_i; o_t) - (a_t - \epsilon_i)\|_2^2
-                \]
-            </div>
+        <h3>Background: Flow Matching Policy Gradients</h3>
+        <p>
+          Standard FPO replaces the PPO likelihood ratio \(\rho(\theta)\) with a
+          likelihood-free surrogate based on CFM loss differences:
+        </p>
+        <div class="equation-box">
+          \[ \hat{r}_{\text{FPO}}(\theta) =
+          \exp\left(\hat{\mathcal{L}}_{\text{CFM},\theta_{\text{old}}}(a_t; o_t)
+          - \hat{\mathcal{L}}_{\text{CFM},\theta}(a_t; o_t)\right) \]
+        </div>
+        <p>
+          where the CFM loss is estimated by sampling noise \(\epsilon_i \sim
+          \mathcal{N}(0, I)\) and flow timesteps \(\tau_i \in [0, 1]\):
+        </p>
+        <div class="equation-box">
+          \[ \hat{\mathcal{L}}_{\text{CFM},\theta}(a_t; o_t) =
+          \frac{1}{N_{\text{mc}}} \sum_{i}^{N_{\text{mc}}}
+          \|\hat{v}_\theta(a_t^{\tau_i}, \tau_i; o_t) - (a_t - \epsilon_i)\|_2^2
+          \]
+        </div>
 
-            <h3>FPO++ Key Improvements</h3>
-            <p>
-                While vanilla FPO succeeds in synthetic benchmarks, we found it unstable for challenging robotics tasks. FPO++ introduces two key modifications:
-            </p>
+        <h3>FPO++ Key Improvements</h3>
+        <p>
+          While vanilla FPO succeeds in synthetic benchmarks, we found it
+          unstable for challenging robotics tasks. FPO++ introduces two key
+          modifications:
+        </p>
 
-            <div class="algorithm-box">
-                <h4>1. Per-Sample Ratio</h4>
-                <p>
-                    Unlike standard FPO which computes a single ratio per action after averaging across Monte Carlo samples, FPO++ computes ratios on a <strong>per-sample basis</strong>. For each sample \(i\), we calculate:
-                </p>
-                <div class="equation-box">
-                    \[
-                    \hat{\rho}_{\text{FPO}}^{(i)}(\theta) = \exp\left(\ell_{\theta_{\text{old}}}(a_t, \tau_i, \epsilon_i; o_t) - \ell_\theta(a_t, \tau_i, \epsilon_i; o_t)\right)
-                    \]
-                </div>
-                <p>
-                    This provides a finer-grained trust region by allowing each \((\tau_i, \epsilon_i)\) pair to be clipped independently, effectively increasing the batch size and reducing gradient variance.
-                </p>
-            </div>
+        <div class="algorithm-box">
+          <h4>1. Per-Sample Ratio</h4>
+          <p>
+            Unlike standard FPO which computes a single ratio per action after
+            averaging across Monte Carlo samples, FPO++ computes ratios on a
+            <strong>per-sample basis</strong>. For each sample \(i\), we
+            calculate:
+          </p>
+          <div class="equation-box">
+            \[ \hat{\rho}_{\text{FPO}}^{(i)}(\theta) =
+            \exp\left(\ell_{\theta_{\text{old}}}(a_t, \tau_i, \epsilon_i; o_t) -
+            \ell_\theta(a_t, \tau_i, \epsilon_i; o_t)\right) \]
+          </div>
+          <p>
+            This provides a finer-grained trust region by allowing each
+            \((\tau_i, \epsilon_i)\) pair to be clipped independently,
+            effectively increasing the batch size and reducing gradient
+            variance.
+          </p>
+        </div>
 
-            <div class="algorithm-box">
-                <h4>2. Asymmetric Trust Region (ASPO)</h4>
-                <p>
-                    FPO++ adopts an <strong>asymmetric trust region</strong> that treats positive and negative advantages differently:
-                </p>
-                <ul class="component-list">
-                    <li><strong>Positive advantages (\(\hat{A}_t \geq 0\)):</strong> Use standard PPO clipping to decrease CFM losses</li>
-                    <li><strong>Negative advantages (\(\hat{A}_t < 0\)):</strong> Use the Simple Policy Optimization (SPO) objective, which provides a gradient signal that pulls ratios back instead of zeroing out gradients</li>
-                </ul>
-                <div class="equation-box">
-                    \[
-                    \psi_{\text{ASPO}}(\rho, \hat{A}_t) = \begin{cases}
-                    \min\left(\rho\hat{A}_t, \text{clip}(\rho, 1-\epsilon^{\text{clip}}, 1+\epsilon^{\text{clip}})\hat{A}_t\right), & \hat{A}_t \geq 0 \\[8pt]
-                    \rho\hat{A}_t - \frac{|\hat{A}_t|}{2\epsilon^{\text{clip}}}(\rho - 1)^2, & \hat{A}_t < 0
-                    \end{cases}
-                    \]
-                </div>
-                <p>
-                    ASPO actively disincentivizes large CFM loss increases, which (i) preserves entropy by penalizing aggressive decreases in action likelihoods, and (ii) stabilizes training by controlling the KL divergence between approximate and true posteriors.
-                </p>
-            </div>
+        <div class="algorithm-box">
+          <h4>2. Asymmetric Trust Region (ASPO)</h4>
+          <p>
+            FPO++ adopts an <strong>asymmetric trust region</strong> that treats
+            positive and negative advantages differently:
+          </p>
+          <ul class="component-list">
+            <li>
+              <strong>Positive advantages (\(\hat{A}_t \geq 0\)):</strong> Use
+              standard PPO clipping to decrease CFM losses
+            </li>
+            <li>
+              <strong>Negative advantages (\(\hat{A}_t < 0\)):</strong> Use the
+              Simple Policy Optimization (SPO) objective, which provides a
+              gradient signal that pulls ratios back instead of zeroing out
+              gradients
+            </li>
+          </ul>
+          <div class="equation-box">
+            \[ \psi_{\text{ASPO}}(\rho, \hat{A}_t) = \begin{cases}
+            \min\left(\rho\hat{A}_t, \text{clip}(\rho, 1-\epsilon^{\text{clip}},
+            1+\epsilon^{\text{clip}})\hat{A}_t\right), & \hat{A}_t \geq 0
+            \\[8pt] \rho\hat{A}_t -
+            \frac{|\hat{A}_t|}{2\epsilon^{\text{clip}}}(\rho - 1)^2, & \hat{A}_t
+            < 0 \end{cases} \]
+          </div>
+          <p>
+            ASPO actively disincentivizes large CFM loss increases, which (i)
+            preserves entropy by penalizing aggressive decreases in action
+            likelihoods, and (ii) stabilizes training by controlling the KL
+            divergence between approximate and true posteriors.
+          </p>
+        </div>
 
-            <h3>Complete FPO++ Objective</h3>
-            <p>
-                Combining the per-sample ratio with the ASPO trust region, the full FPO++ objective is:
-            </p>
-            <div class="highlight-box">
-                <div class="equation-box" style="background: transparent; border: none; margin: 0;">
-                    \[
-                    \max_\theta \mathbb{E}_{a_t \sim \pi_{\theta_{\text{old}}}(a_t|o_t)} \left[ \frac{1}{N_{\text{mc}}} \sum_{i=1}^{N_{\text{mc}}} \psi_{\text{ASPO}}\left(\hat{\rho}_{\text{FPO}}^{(i)}(\theta), \hat{A}_t\right) \right]
-                    \]
-                </div>
-            </div>
+        <h3>Complete FPO++ Objective</h3>
+        <p>
+          Combining the per-sample ratio with the ASPO trust region, the full
+          FPO++ objective is:
+        </p>
+        <div class="highlight-box">
+          <div
+            class="equation-box"
+            style="background: transparent; border: none; margin: 0"
+          >
+            \[ \max_\theta \mathbb{E}_{a_t \sim
+            \pi_{\theta_{\text{old}}}(a_t|o_t)} \left[ \frac{1}{N_{\text{mc}}}
+            \sum_{i=1}^{N_{\text{mc}}}
+            \psi_{\text{ASPO}}\left(\hat{\rho}_{\text{FPO}}^{(i)}(\theta),
+            \hat{A}_t\right) \right] \]
+          </div>
+        </div>
 
-            <h3>Zero-Sampling for Deployment</h3>
-            <p>
-                During training, FPO++ policies explore by sampling initial noise from \(\epsilon \sim \mathcal{N}(0, I)\) and integrating over the learned flow field. At test-time, we initialize flow integration from \(\epsilon = \vec{0}\) (zero-sampling), which improves performance and enables reduced integration steps for lower-latency deployment on real robots.
-            </p>
+        <h3>Zero-Sampling for Deployment</h3>
+        <p>
+          During training, FPO++ policies explore by sampling initial noise from
+          \(\epsilon \sim \mathcal{N}(0, I)\) and integrating over the learned
+          flow field. At test-time, we initialize flow integration from
+          \(\epsilon = \vec{0}\) (zero-sampling), which improves performance and
+          enables reduced integration steps for lower-latency deployment on real
+          robots.
+        </p>
+      </section>
 
-        </section>
-
-        <section id="citation">
-            <h2>Citation</h2>
-            <pre>@article{yi2025fpoplusplus,
+      <section id="citation">
+        <h2>Citation</h2>
+        <pre>
+@article{yi2025fpoplusplus,
   title={Flow Policy Gradients for Robot Control},
   author={Yi, Brent and Choi, Hongsuk and Singh, Himanshu Gaurav and Huang, Xiaoyu and Truong, Takara E. and Sferrazza, Carmelo and Ma, Yi and Duan, Yan and Abbeel, Pieter and Shi, Guanya and Liu, Karen and Kanazawa, Angjoo},
   journal={arXiv preprint},
   year={2025}
-}</pre>
-        </section>
+}</pre
+        >
+      </section>
 
-        <footer style="text-align: center; font-size: 0.8rem; color: #888; margin-top: 100px;">
-            <p>Template inspired by Seohong Park's project pages.</p>
-        </footer>
+      <footer
+        style="
+          text-align: center;
+          font-size: 0.8rem;
+          color: #888;
+          opacity: 0.5;
+          margin: 2em 0;
+        "
+      >
+        <p>
+          Template inspired by project pages from
+          <a href="https://seohong.me/">Seohong Park</a>.
+        </p>
+      </footer>
     </div>
-
-</body>
+  </body>
 </html>
