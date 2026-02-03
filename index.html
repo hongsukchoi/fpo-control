@@ -46,6 +46,8 @@
             font-size: 3rem;
             margin-bottom: 10px;
             color: #202124;
+            user-select: none;
+            cursor: default;
         }
 
         .authors {
@@ -72,6 +74,8 @@
             border-radius: 8px;
             padding: 15px 20px;
             margin-top: 20px;
+            user-select: none;
+            cursor: default;
         }
 
         .author-box .authors {
@@ -81,6 +85,12 @@
 
         .author-box .authors a {
             color: #5f6368;
+            text-decoration: none;
+        }
+
+        .author-box .authors a:hover {
+            color: #1a73e8;
+            text-decoration: underline;
         }
 
         .author-box .affiliations {
@@ -373,18 +383,18 @@
 
             <div class="author-box">
                 <div class="authors">
-                    <a href="#">Brent Yi</a><sup>1,2*</sup>,
-                    <a href="#">Hongsuk Choi</a><sup>1,2*</sup>,
-                    <a href="#">Himanshu Gaurav Singh</a><sup>1,2</sup>,
-                    <a href="#">Xiaoyu Huang</a><sup>1,2</sup>,
-                    <a href="#">Takara E. Truong</a><sup>1,3</sup>,
-                    <a href="#">Carmelo Sferrazza</a><sup>1</sup>,
-                    <a href="#">Yi Ma</a><sup>2,4</sup>,
-                    <a href="#">Rocky Duan</a><sup>1</sup>,
-                    <a href="#">Pieter Abbeel</a><sup>1,2</sup>,
-                    <a href="#">Guanya Shi</a><sup>1,5</sup>,
-                    <a href="#">Karen Liu</a><sup>1,3</sup>,
-                    <a href="#">Angjoo Kanazawa</a><sup>1,2</sup>
+                    <a href="https://brentyi.github.io/" target="_blank">Brent Yi</a><sup>1,2*</sup>,
+                    <a href="https://hongsukchoi.github.io/" target="_blank">Hongsuk Choi</a><sup>1,2*</sup>,
+                    <a href="https://hgaurav2k.github.io/" target="_blank">Himanshu Gaurav Singh</a><sup>1,2</sup>,
+                    <a href="https://scholar.google.com/citations?user=G-x_szsAAAAJ" target="_blank">Xiaoyu Huang</a><sup>1,2</sup>,
+                    <a href="https://www.takaratruong.com/" target="_blank">Takara E. Truong</a><sup>1,3</sup>,
+                    <a href="https://sferrazza.cc/" target="_blank">Carmelo Sferrazza</a><sup>1</sup>,
+                    <a href="https://people.eecs.berkeley.edu/~yima/" target="_blank">Yi Ma</a><sup>2,4</sup>,
+                    <a href="http://rockyduan.com/" target="_blank">Rocky Duan</a><sup>1</sup>,
+                    <a href="https://people.eecs.berkeley.edu/~pabbeel/" target="_blank">Pieter Abbeel</a><sup>1,2</sup>,
+                    <a href="https://www.gshi.me/" target="_blank">Guanya Shi</a><sup>1,5</sup>,
+                    <a href="https://profiles.stanford.edu/c-karen-liu" target="_blank">Karen Liu</a><sup>1,3</sup>,
+                    <a href="https://people.eecs.berkeley.edu/~kanazawa/" target="_blank">Angjoo Kanazawa</a><sup>1,2</sup>
                 </div>
                 <div class="affiliations">
                     <sup>1</sup>Amazon FAR, <sup>2</sup>UC Berkeley, <sup>3</sup>Stanford, <sup>4</sup>HKU, <sup>5</sup>CMU<br>
