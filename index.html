@@ -510,7 +510,10 @@
               arXiv
             </button>
           </a>
-          <a href="https://github.com/amazon-far/fpo-control" data-tooltip="Code will be public by February 9th.">
+          <a
+            href="https://github.com/amazon-far/fpo-control"
+            data-tooltip="Code will be public by February 9th."
+          >
             <button disabled>
               <i class="ti ti-brand-github"></i>
               Code
@@ -536,7 +539,7 @@
         <!-- Locomotion Row -->
         <div class="results-row">
           <div class="row-caption">Legged Locomotion</div>
-          <div class="row-subcaption">IsaacLab Environments</div>
+          <div class="row-subcaption">Default IsaacLab Environments</div>
           <div class="slider-wrapper">
             <button
               class="slider-btn prev"
@@ -809,106 +812,37 @@
       <section id="motivation">
         <h2>Motivation</h2>
 
-        <h3>Why Flow Policies for Robot Control?</h3>
         <p>
-          Likelihood-based policy gradient methods like PPO have enabled
-          impressive robot control results across legged locomotion, humanoid
-          control, and manipulation. However, these methods require
-          differentiable action likelihoods, which constrains policy outputs to
-          <strong>simple distributions</strong> such as diagonal Gaussians. This
-          limitation is problematic for complex robotic tasks that may benefit
-          from more expressive action distributions.
+          Policy gradient algorithms are the dominant approach for training
+          robot control policies from rewards. These methods typically assume
+          access to a differentiable action likelihood \(\pi_\theta(a_t \mid
+          o_t)\); PPO, for example, uses this to optimize a clipped objective:
         </p>
-
-        <p>
-          Flow-based generative models have emerged as the frontier for
-          supervised policy learning in robotics. Policies like Diffusion Policy
-          and <span style="font-family: serif; font-style: italic">&pi;</span
-          ><sub>0</sub> have demonstrated success in learning manipulation from
-          human demonstrations, including at large scale with language
-          conditioning. However, these approaches rely on offline behavior
-          cloning and cannot be improved through online interaction with the
-          environment.
-        </p>
-
-        <div class="highlight-box">
-          <strong>Key Insight:</strong> Flow policies can express more complex,
-          multi-modal action distributions than Gaussian policies. This enables
-          better exploration during training and the ability to capture
-          coordinated, symmetric behaviors (e.g., alternating gaits in
-          locomotion) that are difficult to represent with independent
-          per-dimension sampling.
+        <div class="equation-box">
+          \[ \max_\theta \;\; \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[
+          \min\!\left(\rho_\theta\hat{A}_t,\; \text{clip}(\rho_\theta, 1 \pm
+          \varepsilon^\text{clip})\hat{A}_t \right) \right];\quad \rho_\theta =
+          \frac{\pi_\theta(a_t \mid o_t)}{\pi_{\theta_{\text{old}}}(a_t \mid
+          o_t)} \]
         </div>
-
         <p>
-          Reinforcement learning algorithms that support flow-based
-          representations promise to:
+          We often want to apply algorithms like PPO to more expressive flow and
+          diffusion policies&mdash;for example, to exploit more expressive
+          distributions for exploration or to fine-tune flow policies learned
+          from demonstrations. Prior work in robotics typically solves this by
+          introducing mechanisms for computing likelihoods in flow models (<a
+            href="https://arxiv.org/abs/2409.00588"
+            >DPPO</a
+          >, <a href="https://arxiv.org/abs/2505.22094">ReinFlow</a>,
+          <a href="https://arxiv.org/abs/2505.10482">NCDPO</a>,
+          <a href="https://arxiv.org/abs/2505.18763">GenPO</a>, etc).
         </p>
-        <ul class="component-list">
-          <li>
-            <strong>Enable more expressive exploration:</strong> Flow policies
-            can model correlations between action dimensions, facilitating
-            discovery of coordinated behaviors
-          </li>
-          <li>
-            <strong>Support finetuning of pretrained policies:</strong> Policies
-            pretrained via behavior cloning can be improved through reward-based
-            RL
-          </li>
-          <li>
-            <strong>Train policies from scratch:</strong> Learn complex control
-            policies directly from environment rewards without requiring
-            demonstrations
-          </li>
-        </ul>
-
-        <h3>Limitations of Vanilla FPO</h3>
         <p>
-          The Flow Policy Optimization (FPO) algorithm was proposed to enable
-          PPO-style training of flow policies by replacing likelihood ratios
-          with a surrogate based on conditional flow matching (CFM) losses.
-          While FPO succeeds on simpler synthetic benchmarks like DeepMind
-          Control Suite, we found it
-          <strong>unstable for challenging real-world robotics tasks</strong>.
-        </p>
-
-        <div class="algorithm-box">
-          <h4>Challenges with Vanilla FPO in Robotics</h4>
-          <ul class="component-list">
-            <li>
-              <strong>High-dimensional action spaces:</strong> Humanoid robots
-              have 19-29+ degrees of freedom, making optimization more
-              challenging
-            </li>
-            <li>
-              <strong>Realistic physical constraints:</strong> Joint position
-              limits, torque limits, and contact dynamics introduce
-              discontinuities and hard constraints
-            </li>
-            <li>
-              <strong>Coarse reward signals:</strong> Robotics rewards are often
-              sparse or shaped differently than game-like benchmarks
-            </li>
-            <li>
-              <strong>Gradient variance:</strong> The per-action ratio
-              formulation in vanilla FPO leads to high gradient variance,
-              causing unstable updates
-            </li>
-            <li>
-              <strong>Entropy collapse:</strong> Without proper regularization,
-              flow policies can prematurely narrow their action distributions,
-              losing the ability to explore and recover from local minima
-            </li>
-          </ul>
-        </div>
-
-        <p>
-          These issues manifest as training instability: vanilla FPO policies
-          are prone to <strong>catastrophic failures</strong> and
-          <strong>local minima</strong>, even after extensive hyperparameter
-          tuning. FPO++ addresses these challenges through per-sample ratio
-          clipping and an asymmetric trust region that reduces gradient variance
-          while preserving entropy.
+          <em>Our contribution:</em> we show how a simpler approach based on
+          <a href="https://flowreinforce.github.io/">
+            flow matching policy gradients</a
+          >, which bypasses likelihood computation entirely, can be made
+          effective across a range of robotics tasks.
         </p>
       </section>
 
@@ -916,134 +850,102 @@
         <h2>Algorithm</h2>
 
         <p>
-          We introduce <strong>FPO++</strong>, an improved flow policy gradient
-          algorithm that enables stable training of flow-based policies for
-          real-world robotics tasks. FPO++ builds upon the Flow Policy
-          Optimization (FPO) framework, which bypasses intractable likelihood
-          computation by using conditional flow matching (CFM) losses as a
-          surrogate for the PPO likelihood ratio.
+          We introduce FPO++, an updated version of FPO (Flow Policy
+          Optimization) that succeeds in real-world robotics tasks. We found two
+          changes necessary for this.
         </p>
 
-        <h3>Background: Flow Matching Policy Gradients</h3>
+        <h3>Preliminaries</h3>
+
         <p>
-          Standard FPO replaces the PPO likelihood ratio \(\rho(\theta)\) with a
-          likelihood-free surrogate based on CFM loss differences:
-        </p>
-        <div class="equation-box">
-          \[ \hat{r}_{\text{FPO}}(\theta) =
-          \exp\left(\hat{\mathcal{L}}_{\text{CFM},\theta_{\text{old}}}(a_t; o_t)
-          - \hat{\mathcal{L}}_{\text{CFM},\theta}(a_t; o_t)\right) \]
-        </div>
-        <p>
-          where the CFM loss is estimated by sampling noise \(\epsilon_i \sim
-          \mathcal{N}(0, I)\) and flow timesteps \(\tau_i \in [0, 1]\):
+          <strong>Flow matching policy gradients.</strong> The goal of FPO is to
+          enable policy gradient-style training of flow policies without
+          explicit likelihoods. FPO proposes a surrogate for the likelihood
+          ratio:
         </p>
         <div class="equation-box">
-          \[ \hat{\mathcal{L}}_{\text{CFM},\theta}(a_t; o_t) =
-          \frac{1}{N_{\text{mc}}} \sum_{i}^{N_{\text{mc}}}
-          \|\hat{v}_\theta(a_t^{\tau_i}, \tau_i; o_t) - (a_t - \epsilon_i)\|_2^2
-          \]
+          \[ \hat{\rho}_{\text{FPO}}(\theta) =
+          \exp\!\Big(\hat{\mathcal{L}}_{\text{CFM},\theta_{\text{old}}}(a_t;
+          o_t) - \hat{\mathcal{L}}_{\text{CFM},\theta}(a_t; o_t)\Big) \]
         </div>
-
-        <h3>FPO++ Key Improvements</h3>
         <p>
-          While vanilla FPO succeeds in synthetic benchmarks, we found it
-          unstable for challenging robotics tasks. FPO++ introduces two key
-          modifications:
+          where \(\hat{\mathcal{L}}_{\text{CFM},\theta}\) is a Monte Carlo
+          estimate of the conditional flow matching (CFM) loss. This enables
+          PPO-style training:
+        </p>
+        <div class="equation-box">
+          \[ \max_\theta \;\; \mathbb{E}_{\pi_{\theta_\text{old}}} \left[
+          \min\!\left(\hat{\rho}_{\text{FPO}}(\theta)\hat{A}_t,\;
+          \text{clip}(\hat{\rho}_{\text{FPO}}(\theta), 1 \pm
+          \varepsilon^\text{clip})\hat{A}_t \right) \right] \]
+        </div>
+        <p>
+          Intuitively, FPO uses CFM loss differences to approximate action
+          log-likelihood differences, then uses advantage estimates to shift
+          probability flow toward higher-reward actions.
         </p>
 
-        <div class="algorithm-box">
-          <h4>1. Per-Sample Ratio</h4>
-          <p>
-            Unlike standard FPO which computes a single ratio per action after
-            averaging across Monte Carlo samples, FPO++ computes ratios on a
-            <strong>per-sample basis</strong>. For each sample \(i\), we
-            calculate:
-          </p>
-          <div class="equation-box">
-            \[ \hat{\rho}_{\text{FPO}}^{(i)}(\theta) =
-            \exp\left(\ell_{\theta_{\text{old}}}(a_t, \tau_i, \epsilon_i; o_t) -
-            \ell_\theta(a_t, \tau_i, \epsilon_i; o_t)\right) \]
-          </div>
-          <p>
-            This provides a finer-grained trust region by allowing each
-            \((\tau_i, \epsilon_i)\) pair to be clipped independently,
-            effectively increasing the batch size and reducing gradient
-            variance.
-          </p>
-        </div>
-
-        <div class="algorithm-box">
-          <h4>2. Asymmetric Trust Region (ASPO)</h4>
-          <p>
-            FPO++ adopts an <strong>asymmetric trust region</strong> that treats
-            positive and negative advantages differently:
-          </p>
-          <ul class="component-list">
-            <li>
-              <strong>Positive advantages (\(\hat{A}_t \geq 0\)):</strong> Use
-              standard PPO clipping to decrease CFM losses
-            </li>
-            <li>
-              <strong>Negative advantages (\(\hat{A}_t < 0\)):</strong> Use the
-              Simple Policy Optimization (SPO) objective, which provides a
-              gradient signal that pulls ratios back instead of zeroing out
-              gradients
-            </li>
-          </ul>
-          <div class="equation-box">
-            \[ \psi_{\text{ASPO}}(\rho, \hat{A}_t) = \begin{cases}
-            \min\left(\rho\hat{A}_t, \text{clip}(\rho, 1-\epsilon^{\text{clip}},
-            1+\epsilon^{\text{clip}})\hat{A}_t\right), & \hat{A}_t \geq 0
-            \\[8pt] \rho\hat{A}_t -
-            \frac{|\hat{A}_t|}{2\epsilon^{\text{clip}}}(\rho - 1)^2, & \hat{A}_t
-            < 0 \end{cases} \]
-          </div>
-          <p>
-            ASPO actively disincentivizes large CFM loss increases, which (i)
-            preserves entropy by penalizing aggressive decreases in action
-            likelihoods, and (ii) stabilizes training by controlling the KL
-            divergence between approximate and true posteriors.
-          </p>
-        </div>
-
-        <h3>Complete FPO++ Objective</h3>
         <p>
-          Combining the per-sample ratio with the ASPO trust region, the full
-          FPO++ objective is:
+          <strong>Conditional flow matching loss.</strong> To estimate CFM
+          losses, we draw \(N_\text{mc}\) noise \(\epsilon_i \sim
+          \mathcal{N}(0,I)\) and flow step \(\tau_i \in [0, 1]\) pairs. For
+          linear interpolation \(a_{t}^{\tau_i} = \tau_i a_t + (1 -
+          \tau_i)\epsilon_i\), squared errors are computed for velocity
+          predictions:
         </p>
-        <div class="highlight-box">
-          <div
-            class="equation-box"
-            style="background: transparent; border: none; margin: 0"
-          >
-            \[ \max_\theta \mathbb{E}_{a_t \sim
-            \pi_{\theta_{\text{old}}}(a_t|o_t)} \left[ \frac{1}{N_{\text{mc}}}
-            \sum_{i=1}^{N_{\text{mc}}}
-            \psi_{\text{ASPO}}\left(\hat{\rho}_{\text{FPO}}^{(i)}(\theta),
-            \hat{A}_t\right) \right] \]
-          </div>
+        <div class="equation-box">
+          \[ \ell_\theta^{(i,t)} = \left\| \hat{v}_\theta\!\left(a_t^{\tau_i},
+          \tau_i; o_t\right) - (a_t - \epsilon_i) \right\|^2_2 \]
         </div>
 
-        <h3>Zero-Sampling for Deployment</h3>
+        <h3>FPO++</h3>
+
         <p>
-          During training, FPO++ policies explore by sampling initial noise from
-          \(\epsilon \sim \mathcal{N}(0, I)\) and integrating over the learned
-          flow field. At test-time, we initialize flow integration from
-          \(\epsilon = \vec{0}\) (zero-sampling), which improves performance and
-          enables reduced integration steps for lower-latency deployment on real
-          robots.
+          While FPO succeeds in synthetic benchmarks, we found it required
+          refinements for more difficult tasks. FPO++ proposes two changes:
+          (1)&nbsp;per-sample ratios and (2)&nbsp;an asymmetric trust region.
+        </p>
+
+        <p>
+          <strong>Per-sample ratio.</strong> Standard FPO produces a single
+          ratio per action by averaging over \((\tau_i, \epsilon_i)\) samples.
+          In FPO++, we instead calculate a separate ratio for each sample:
+        </p>
+        <div class="equation-box">
+          \[ \hat{\rho}_\text{FPO++}^{(i)}(\theta) =
+          \exp\!\left(\ell_{\theta_{\text{old}}}^{(i,t)} -
+          \ell_\theta^{(i,t)}\right) \]
+        </div>
+        <p>
+          This provides a finer-grained trust region by allowing each \((\tau_i,
+          \epsilon_i)\) pair to be clipped independently.
+        </p>
+
+        <p>
+          <strong>Asymmetric trust region (ASPO).</strong> We use PPO clipping
+          for positive-advantage actions; for negative-advantage actions, we
+          adopt the more constrained
+          <a href="https://arxiv.org/abs/2401.16025">SPO</a> objective. Instead
+          of zeroing out gradients for samples with ratios that surpass the
+          trust region, SPO provides a gradient signal that pulls ratios back.
+          Applying SPO to negative advantages disincentivizes large CFM loss
+          increases, preserving entropy and stabilizing training.
+        </p>
+
+        <p>
+          We validate the effect of these changes in our experiments; see
+          <a href="https://arxiv.org/abs/2602.02481">paper</a> for details!
         </p>
       </section>
 
       <section id="citation">
         <h2>Citation</h2>
         <pre>
-@article{yi2025fpoplusplus,
+@article{yi2026flow,
   title={Flow Policy Gradients for Robot Control},
-  author={Yi, Brent and Choi, Hongsuk and Singh, Himanshu Gaurav and Huang, Xiaoyu and Truong, Takara E. and Sferrazza, Carmelo and Ma, Yi and Duan, Yan and Abbeel, Pieter and Shi, Guanya and Liu, Karen and Kanazawa, Angjoo},
-  journal={arXiv preprint},
-  year={2025}
+  author={Yi, Brent and Choi, Hongsuk and Singh, Himanshu Gaurav and Huang, Xiaoyu and Truong, Takara E. and Sferrazza, Carmelo and Ma, Yi and Duan, Rocky and Abbeel, Pieter and Shi, Guanya and Liu, Karen and Kanazawa, Angjoo},
+  journal={arXiv preprint arXiv:2602.02481},
+  year={2026}
 }</pre
         >
       </section>
