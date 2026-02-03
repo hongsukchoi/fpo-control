@@ -131,21 +131,57 @@
         margin: 20px 0;
       }
 
-      .btn {
+      .links button {
         background-color: #3c4043;
         padding: 8px 20px;
         border-radius: 25px;
-        text-decoration: none;
+        border: none;
+        font-family: inherit;
+        font-size: inherit;
         font-weight: 300;
+        color: #fff;
+        cursor: pointer;
         transition: background 0.3s;
       }
-      a.btn:link,
-      a.btn:visited {
-        color: #fff;
+
+      .links button:hover:not(:disabled) {
+        background-color: #202124;
       }
 
-      .btn:hover {
-        background-color: #202124;
+      .links button:disabled {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+
+      .links a:has(button:disabled) {
+        cursor: pointer;
+      }
+
+      [data-tooltip] {
+        position: relative;
+      }
+
+      [data-tooltip]::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 8px;
+        padding: 6px 12px;
+        background: #202124;
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: 400;
+        white-space: nowrap;
+        border-radius: 6px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.15s;
+      }
+
+      [data-tooltip]:hover::after {
+        opacity: 1;
       }
 
       /* Content Sections */
@@ -468,13 +504,17 @@
         <div class="affiliations"><div>*Equal Contribution</div></div>
 
         <div class="links">
-          <a href="#" class="btn">
-            <i class="ti ti-article"></i>
-            Paper</a
-          >
-          <a href="https://github.com/amazon-far/fpo-control" class="btn">
-            <i class="ti ti-brand-github"></i>
-            Code
+          <a href="https://arxiv.org/abs/2602.02481">
+            <button>
+              <i class="ti ti-article"></i>
+              arXiv
+            </button>
+          </a>
+          <a href="https://github.com/amazon-far/fpo-control" data-tooltip="Code will be public by February 9th.">
+            <button disabled>
+              <i class="ti ti-brand-github"></i>
+              Code
+            </button>
           </a>
         </div>
 
