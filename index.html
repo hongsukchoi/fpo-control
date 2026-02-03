@@ -476,7 +476,7 @@
             <a href="https://people.eecs.berkeley.edu/~yima/">Yi Ma</a
             ><sup>2,4</sup>
           </div>
-          <div><a href="http://rockyduan.com/">Yan Duan</a><sup>1</sup></div>
+          <div><a href="http://rockyduan.com/">Rocky Duan</a><sup>1</sup></div>
           <div class="flex-break-wide"></div>
           <div>
             <a href="https://people.eecs.berkeley.edu/~pabbeel/"
@@ -512,7 +512,7 @@
           </a>
           <a
             href="https://github.com/amazon-far/fpo-control"
-            data-tooltip="Code will be public by February 9th."
+            data-tooltip="Repository will be public by February 9th."
           >
             <button disabled>
               <i class="ti ti-brand-github"></i>
@@ -838,7 +838,7 @@
           <a href="https://arxiv.org/abs/2505.18763">GenPO</a>, etc).
         </p>
         <p>
-          <em>Our contribution:</em> we show how a simpler approach based on
+          Our contribution: we show how a simpler approach based on
           <a href="https://flowreinforce.github.io/">
             flow matching policy gradients</a
           >, which bypasses likelihood computation entirely, can be made
@@ -869,9 +869,8 @@
           o_t) - \hat{\mathcal{L}}_{\text{CFM},\theta}(a_t; o_t)\Big) \]
         </div>
         <p>
-          where \(\hat{\mathcal{L}}_{\text{CFM},\theta}\) is a Monte Carlo
-          estimate of the conditional flow matching (CFM) loss. This enables
-          PPO-style training:
+          where \(\hat{\mathcal{L}}_{\text{CFM},\theta}\) is an estimate of the
+          conditional flow matching (CFM) loss. This enables PPO-style training:
         </p>
         <div class="equation-box">
           \[ \max_\theta \;\; \mathbb{E}_{\pi_{\theta_\text{old}}} \left[
@@ -894,7 +893,9 @@
           predictions:
         </p>
         <div class="equation-box">
-          \[ \ell_\theta^{(i,t)} = \left\| \hat{v}_\theta\!\left(a_t^{\tau_i},
+          \[ \hat{\mathcal{L}}_{\text{CFM},\theta}(a_t; o_t) =
+          \frac{1}{N_\text{mc}} \sum_{i}^{N_\text{mc}} \ell_\theta^{(i,t)};\quad
+          \ell_\theta^{(i,t)} = \left\| \hat{v}_\theta\!\left(a_t^{\tau_i},
           \tau_i; o_t\right) - (a_t - \epsilon_i) \right\|^2_2 \]
         </div>
 
