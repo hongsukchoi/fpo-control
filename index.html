@@ -85,7 +85,7 @@
       }
 
       sup {
-        font-size: 0.6em;
+        font-size: 0.7em;
       }
 
       a:link,
@@ -120,7 +120,7 @@
         font-size: 1.1rem;
         color: #5f6368;
         max-width: 800px;
-        margin: 15px auto 25px;
+        margin: 15px auto;
       }
 
       /* Button Links (Paper, Code, etc.) */
@@ -447,9 +447,14 @@
   <body>
     <div class="container">
       <header>
-        <h1>Flow Policy Gradients<br>for Robot&nbsp; Control</h1>
+        <h1>Flow Policy Gradients<br />for Robot&nbsp; Control</h1>
         <!-- <h1>Flow Policy Gradients for Robot&nbsp;Control</h1> -->
 
+        <p class="tldr" style="max-width: 600px">
+          <strong>TLDR;</strong> a simple recipe for online RL with flow
+          policies, validated in robot locomotion, humanoid motion tracking, and
+          manipulation
+        </p>
         <div class="links">
           <a href="https://arxiv.org/abs/2602.02481">
             <button>
@@ -467,56 +472,49 @@
             </button>
           </a>
         </div>
-
-        <p class="tldr" style="max-width: 600px">
-          <strong>TLDR;</strong> a simple recipe for online RL with flow
-          policies, validated on robot locomotion, humanoid motion tracking, and
-          manipulation
-        </p>
-
         <div class="authors">
           <div>
-            <a href="https://brentyi.github.io/">Brent Yi</a><sup>1,2*</sup>
+            <a href="https://brentyi.github.io/">Brent Yi</a><sup>12*</sup>
           </div>
           <div>
             <a href="https://hongsukchoi.github.io/">Hongsuk Choi</a
-            ><sup>1,2*</sup>
+            ><sup>12*</sup>
           </div>
           <div>
-            <a href="https://hgaurav2k.github.io/">Himanshu Gaurav Singh</a
-            ><sup>1,2</sup>
+            <a href="https://hgaurav2k.github.io/">Himanshu Singh</a
+            ><sup>12</sup>
           </div>
           <div>
-            <a href="https://x.com/x_h_ucb">Xiaoyu Huang</a><sup>1,2</sup>
+            <a href="https://x.com/x_h_ucb">Xiaoyu Huang</a><sup>12</sup>
           </div>
           <div class="flex-break-wide"></div>
           <div>
             <a href="https://www.takaratruong.com/">Takara E. Truong</a
-            ><sup>1,3</sup>
+            ><sup>13</sup>
           </div>
           <div>
             <a href="https://sferrazza.cc/">Carmelo Sferrazza</a><sup>1</sup>
           </div>
           <div>
             <a href="https://people.eecs.berkeley.edu/~yima/">Yi Ma</a
-            ><sup>2,4</sup>
+            ><sup>24</sup>
           </div>
-          <div><a href="http://rockyduan.com/">Rocky Duan</a><sup>1</sup></div>
+          <div><a href="http://rockyduan.com/">Rocky Duan</a><sup>1&dagger;</sup></div>
           <div class="flex-break-wide"></div>
           <div>
             <a href="https://people.eecs.berkeley.edu/~pabbeel/"
               >Pieter Abbeel</a
-            ><sup>1,2</sup>
+            ><sup>12&dagger;</sup>
           </div>
-          <div><a href="https://www.gshi.me/">Guanya Shi</a><sup>1,5</sup></div>
+          <div><a href="https://www.gshi.me/">Guanya Shi</a><sup>15&dagger;</sup></div>
           <div>
             <a href="https://profiles.stanford.edu/c-karen-liu">Karen Liu</a
-            ><sup>1,3</sup>
+            ><sup>13&dagger;</sup>
           </div>
           <div>
             <a href="https://people.eecs.berkeley.edu/~kanazawa/"
               >Angjoo Kanazawa</a
-            ><sup>1,2</sup>
+            ><sup>12&dagger;</sup>
           </div>
         </div>
         <div class="affiliations">
@@ -525,7 +523,8 @@
           <div><sup>3</sup>Stanford</div>
           <div><sup>4</sup>HKU</div>
           <div><sup>5</sup>CMU</div>
-          <div>*Equal Contribution</div>
+          <div><sup>*</sup>Equal Contribution</div>
+          <div>&dagger;FAR Team Co-lead</div>
         </div>
 
         <!-- <img -->
@@ -628,7 +627,8 @@
         <div class="results-row">
           <div class="row-caption">Sim-to-Real</div>
           <div class="row-subcaption">
-            Motion Tracking from BeyondMimic task<br>Locomotion from Holosama task
+            Motion Tracking from BeyondMimic task<br />Locomotion from Holosama
+            task
           </div>
           <div class="slider-wrapper">
             <button
@@ -640,16 +640,16 @@
             <div class="video-slider crop-height">
               <video autoplay muted loop playsinline>
                 <source
-                    src="asset/motion_tracking/website_subject1_dance1_v1_part8_cropped.mp4"
-                    type="video/mp4"
+                  src="asset/motion_tracking/website_subject1_dance1_v1_part8_cropped.mp4"
+                  type="video/mp4"
                 />
-                </video>
-                <video autoplay muted loop playsinline>
-                    <source
-                      src="asset/motion_tracking/website_dance1_subject2_v6_part2_cropped.mp4"
-                      type="video/mp4"
-                    />
-                  </video>
+              </video>
+              <video autoplay muted loop playsinline>
+                <source
+                  src="asset/motion_tracking/website_dance1_subject2_v6_part2_cropped.mp4"
+                  type="video/mp4"
+                />
+              </video>
               <video autoplay muted loop playsinline>
                 <source
                   src="asset/motion_tracking/website_fight1_subject2_v1_part1_cropped.mp4"
@@ -814,9 +814,9 @@
 
         <p>
           Policy gradient algorithms are the dominant approach for training
-          robot control policies from rewards. These methods typically assume
-          access to a differentiable action likelihood \(\pi_\theta(a_t \mid
-          o_t)\); PPO, for example, uses this to optimize a clipped objective:
+          robot control policies from rewards. These methods typically assume a
+          differentiable action likelihood \(\pi_\theta(a_t \mid o_t)\), like in
+          the clipped PPO objective:
         </p>
         <div class="equation-box">
           \[ \max_\theta \;\; \mathbb{E}_{\pi_{\theta_{\text{old}}}} \left[
