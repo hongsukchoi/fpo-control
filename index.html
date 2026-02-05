@@ -399,6 +399,77 @@
         border-radius: 0 8px 8px 0;
       }
 
+      /* Clickable video hover highlight */
+      .video-slider.clickable-video video {
+        cursor: pointer;
+        transition: outline 0.15s, outline-offset 0.15s;
+        outline: 2px solid transparent;
+        outline-offset: -2px;
+      }
+
+      .video-slider.clickable-video video:hover {
+        outline: 3px solid #4dacff;
+        outline-offset: -3px;
+      }
+
+      /* Video lightbox modal */
+      .video-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.7);
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+      }
+
+      .video-modal-overlay.active {
+        display: flex;
+      }
+
+      .video-modal {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        background: #000;
+      }
+
+      .video-modal video {
+        display: block;
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 10px;
+      }
+
+      .video-modal-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        line-height: 1;
+        user-select: none;
+      }
+
+      .video-modal-close:hover {
+        background: rgba(0, 0, 0, 0.9);
+      }
+
       @media (min-width: 700px) {
         .flex-break-wide {
           flex-basis: 100%;
@@ -634,7 +705,7 @@
             >
               &#10094;
             </button>
-            <div class="video-slider crop-height">
+            <div class="video-slider crop-height clickable-video">
               <video autoplay muted loop playsinline>
                 <source
                   src="asset/motion_tracking/website_subject1_dance1_v1_part8_cropped.mp4"
@@ -749,7 +820,7 @@
             >
               &#10094;
             </button>
-            <div class="video-slider crop-top">
+            <div class="video-slider crop-top clickable-video">
               <video autoplay muted loop playsinline>
                 <source
                   src="asset/t1_cropped_videos/t1_part1_cropped.mp4"
@@ -1007,5 +1078,46 @@
         </p>
       </footer>
     </div>
+    <!-- Video lightbox modal -->
+    <div class="video-modal-overlay" id="videoModal">
+      <div class="video-modal">
+        <button class="video-modal-close" id="videoModalClose">&times;</button>
+        <video id="videoModalPlayer" autoplay loop muted playsinline></video>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const overlay = document.getElementById("videoModal");
+        const player = document.getElementById("videoModalPlayer");
+        const closeBtn = document.getElementById("videoModalClose");
+
+        // Open modal when clicking a video inside a .clickable-video slider
+        document.querySelectorAll(".clickable-video video").forEach((vid) => {
+          vid.addEventListener("click", (e) => {
+            e.preventDefault();
+            const src = vid.querySelector("source")?.src || vid.src;
+            player.src = src;
+            player.currentTime = vid.currentTime;
+            overlay.classList.add("active");
+          });
+        });
+
+        function closeModal() {
+          overlay.classList.remove("active");
+          player.pause();
+          player.removeAttribute("src");
+          player.load();
+        }
+
+        closeBtn.addEventListener("click", closeModal);
+        overlay.addEventListener("click", (e) => {
+          if (e.target === overlay) closeModal();
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") closeModal();
+        });
+      })();
+    </script>
   </body>
 </html>
