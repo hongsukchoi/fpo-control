@@ -402,7 +402,9 @@
       /* Clickable video hover highlight */
       .video-slider.clickable-video video {
         cursor: pointer;
-        transition: outline 0.15s, outline-offset 0.15s;
+        transition:
+          outline 0.15s,
+          outline-offset 0.15s;
         outline: 2px solid transparent;
         outline-offset: -2px;
       }
@@ -567,14 +569,18 @@
             <a href="https://people.eecs.berkeley.edu/~yima/">Yi Ma</a
             ><sup>24</sup>
           </div>
-          <div><a href="http://rockyduan.com/">Rocky Duan</a><sup>1&dagger;</sup></div>
+          <div>
+            <a href="http://rockyduan.com/">Rocky Duan</a><sup>1&dagger;</sup>
+          </div>
           <div class="flex-break-wide"></div>
           <div>
             <a href="https://people.eecs.berkeley.edu/~pabbeel/"
               >Pieter Abbeel</a
             ><sup>12&dagger;</sup>
           </div>
-          <div><a href="https://www.gshi.me/">Guanya Shi</a><sup>15&dagger;</sup></div>
+          <div>
+            <a href="https://www.gshi.me/">Guanya Shi</a><sup>15&dagger;</sup>
+          </div>
           <div>
             <a href="https://profiles.stanford.edu/c-karen-liu">Karen Liu</a
             ><sup>13&dagger;</sup>
@@ -803,7 +809,6 @@
                   type="video/mp4"
                 />
               </video>
-
             </div>
             <button
               class="slider-btn next"
@@ -950,7 +955,7 @@
         </p>
         <p>
           <strong>Our contribution:</strong>
-        we show how a simpler approach based on
+          we show how a simpler approach based on
           <a href="https://flowreinforce.github.io/">
             flow matching policy gradients</a
           >, which bypasses likelihood computation entirely, can be made
@@ -961,19 +966,13 @@
       <section id="algorithm">
         <h2>Algorithm</h2>
 
-        <p>
-          We introduce FPO++, an updated version of FPO (Flow Policy
-          Optimization) that succeeds in real-world robotics tasks. We found two
-          changes necessary for this.
-        </p>
-
         <h3>Preliminaries</h3>
 
         <p>
-          <strong>Flow matching policy gradients.</strong> The goal of FPO is to
-          enable policy gradient-style training of flow policies without
-          explicit likelihoods. FPO proposes a surrogate for the likelihood
-          ratio:
+          <strong>Flow matching policy gradients.</strong> The goal of FPO (Flow
+          Policy Optimization) is to enable policy gradient-style training of
+          flow policies without explicit likelihoods. FPO proposes a surrogate
+          for the likelihood ratio:
         </p>
         <div class="equation-box">
           \[ \hat{\rho}_{\text{FPO}}(\theta) =
