@@ -1,3 +1,5 @@
 .DS_Store
 asset_old/
 make_teaser_video.py
+make_teaser_video*.py
+teaser_*.mp4
